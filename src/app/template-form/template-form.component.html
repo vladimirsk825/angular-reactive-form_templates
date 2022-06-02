@@ -1,0 +1,85 @@
+
+<div class="container">
+    <form (ngSubmit)="submit()" #forma="ngForm">
+        <label for="name"><b>Nombre</b></label>
+        <input type="text"
+                #name="ngModel"
+                [(ngModel)]="registerForm.name"
+                placeholder="Ingrese su nombre"
+                name="name"
+                minlength="5"
+                class="form-control"
+                required="true"
+                [ngClass]="{'is-valid': !name.valid,'is-invalid': name.invalid}">
+         <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+            <div *ngIf="name?.errors?.['minlength']">
+                Minimo 5 Caracteres.
+            </div>
+            <div *ngIf="name?.errors?.['required']">
+                Ingrese un nombre valido por favor.
+            </div>
+         </div>
+        
+         <label for="email"><b>Correo electrónico</b></label>
+		<input
+            type="email"
+            #email="ngModel"
+            [(ngModel)]="registerForm.email"
+            placeholder="Introduzca la correo electrónico"
+            name="email"
+            class="form-control"
+            required
+            [ngClass]="{'is-valid': !email.invalid, 'is-invalid': email.invalid}"
+            
+          />
+
+		<div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+			<div *ngIf="email?.errors?.['required']">
+				Ingrese un email {{ email.value }}
+			</div>
+			<div *ngIf="email.errors">
+				El correo electronico tiene errores.
+				{{ email.value }}
+			</div>
+		</div>
+
+		<label for="psw"><b>Contraseña</b></label>
+		<input
+            type="password"
+            placeholder="Introduzca la contraseña"
+            #password="ngModel"
+            [(ngModel)]="registerForm.password"
+            name="password"
+            class="form-control"
+            required
+            [ngClass]="{'is-valid': !password.invalid, 'is-invalid': password.invalid}"
+          />
+		<div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+			<div *ngIf="password?.errors?.['required']">
+				Ingrese una contraseña por favor
+			</div>
+		</div>
+		<label for="psw"><b>Repetir Contraseña</b></label>
+		<input
+            type="password"
+            placeholder="Repetir la contraseña"
+            #repeatPass="ngModel"
+            [(ngModel)]="registerForm.repeatPass"
+            name="repeatPass"
+            class="form-control"
+            required
+            [ngClass]="{'is-valid': !repeatPass.invalid, 'is-invalid': repeatPass.invalid}"
+          />
+		<div class="invalid-feedback" *ngIf="repeatPass.invalid && (repeatPass.dirty || repeatPass.touched)">
+			<div *ngIf="repeatPass?.errors?.['required']">
+				Ingrese una contraseña por favor
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-lg">
+				<button type="submit" [disabled]="!forma.valid" class="signup-btn">Iniciar sesión</button>
+			</div>
+		</div>
+    </form>
+</div>

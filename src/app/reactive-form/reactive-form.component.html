@@ -1,0 +1,41 @@
+<div class="container">
+<form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+    <label for="name"></label>
+    <input type="text" 
+           formControlName="name" 
+           class="form-control" 
+           [ngClass]="{'is-invalid': form['name'].errors }">
+    <div *ngIf="form['name'].errors" class="invalid-feedback">
+        <div *ngIf="form['name'].errors['required']">
+            Nombre obligatorio
+        </div>
+    </div>
+
+        <label>Email</label>
+		<input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': form['email'].errors }" />
+		<div *ngIf="form['email'].errors" class="invalid-feedback">
+			<div *ngIf="form['email'].errors['required']">El email es obligatorio</div>
+			<div *ngIf="form['email'].errors['email']">El email debe de ser válido</div>
+		</div>
+
+		<label>Contraseña</label>
+		<input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': form['password'].errors }" />
+		<div *ngIf="form['password'].errors" class="invalid-feedback">
+			<div *ngIf="form['password'].errors['required']">Password is required</div>
+			<div *ngIf="form['password'].errors['minlength']">Password must be at least 6 characters</div>
+		</div>
+
+		<label>Repetir contraseña</label>
+		<input type="password" formControlName="repeatPass" class="form-control" [ngClass]="{ 'is-invalid': form['repeatPass'].errors }" />
+		<div *ngIf="form['repeatPass'].errors" class="invalid-feedback">
+			<div *ngIf="form['repeatPass'].errors['required']">Repetir contraseña es requerido</div>
+			<div *ngIf="form['repeatPass'].errors['mustMatch']">Las contraseñas debden de coincidir</div>
+		</div>
+    <div class=" text-center">
+        <button class="btn btn-primary mr1" [disabled]="registerForm.invalid">Registrarse</button>
+        <button class="btn btn-secondary"  type="reset" (click)="onReset()">cancelar</button>
+
+    </div>
+</form>
+
+</div>
